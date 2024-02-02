@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 221, 124, 233)),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 233, 137, 246)),
         useMaterial3: true,
       ),
       home: const Login(title: 'Login App'),
@@ -53,7 +54,6 @@ class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
 }
-
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
@@ -88,38 +88,22 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
-            Padding(
-  padding:
-    const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
-      child: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              if (emailController.text == "arun@gogosoon.com" &&
-                            passwordController.text == "qazxswedcvfr") {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(
-                      email: emailController.text,
-                    )),
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Invalid Credentials')),
-                  );
-              }
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Please fill input')),
-              );
-            }
-          },
-        child: const Text('Submit'),
-      ),
-    ),
-),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: "Password"),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
+                ),
+              ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
@@ -128,21 +112,22 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Navigate the user to the Home page
-              if (emailController.text == "doloresabrilsanchez@gmail.com" && passwordController.text == "12345") {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(
-                        email: emailController.text,
-                    )),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Invalid Credentials')),
-                    );
-                }
-                        
+                        if (emailController.text ==
+                                "doloresabrilsanchez@gmail.com" &&
+                            passwordController.text == "12345") {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage(
+                                      email: emailController.text,
+                                    )),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Invalid Credentials')),
+                          );
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Please fill input')),
@@ -156,8 +141,6 @@ class _LoginState extends State<Login> {
             ],
           ),
         ),
-
-        
       ),
     );
   }
@@ -188,12 +171,5 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ));
-        
   }
-
-  
 }
-
-
-
-
